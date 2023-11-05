@@ -1,0 +1,41 @@
+body {
+	--fsAddBuffer: 22px;
+}
+#lipsumcom_header,
+#lipsumcom_leaderboard_bottom,
+#lipsumcom_incontent,
+#lipsumcom_left_siderail,
+#lipsumcom_right_siderail {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: calc(var(--height) + var(--fsAddBuffer));
+	width: 100%;
+}
+#lipsumcom_header {
+		--height: 280px;
+}
+#lipsumcom_incontent {
+		--height: 280px;
+}
+#lipsumcom_leaderboard_bottom {
+		--height: 280px;
+}
+@media only screen and (min-width: 768px) {
+	#lipsumcom_header {
+		--height: 250px;
+	}
+	#lipsumcom_incontent {
+		--height: 90px;
+	}
+	#lipsumcom_leaderboard_bottom {
+		--height: 250px;
+	}
+	#lipsumcom_left_siderail {
+		--height: 600px;
+	}
+	#lipsumcom_right_siderail {
+		--height: 600px;
+	}
+}

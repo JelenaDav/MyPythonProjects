@@ -1,0 +1,26 @@
+/*
+  Advally CSS Rules
+  Updated 2023-09-28 14:58:08
+*/
+
+	/* Sizemap: HeaderSizemap */
+										@media (min-width: 1050px) {
+							#ROS_TOP_LEADERBOARD,#ROS_TOP_LEADERBOARD,#ROS_TOP_LEADERBOARD {
+					height: 250px;
+text-align: center;
+				}
+			}
+														@media (min-width: 800px) and (max-width: 1049px) {
+							#ROS_TOP_LEADERBOARD,#ROS_TOP_LEADERBOARD,#ROS_TOP_LEADERBOARD {
+					height: 90px;
+text-align: center;
+				}
+			}
+														@media (min-width: 0px) and (max-width: 799px) {
+							#ROS_TOP_LEADERBOARD,#ROS_TOP_LEADERBOARD,#ROS_TOP_LEADERBOARD {
+					height: 100px;
+text-align: center;
+margin: 0px auto;
+				}
+			}
+						

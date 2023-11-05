@@ -1,0 +1,28 @@
+*{
+   font-family: 'Gilroy-Bold'!important;
+}
+
+.ex #navs .nav {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+}
+
+.ex .nav.right {
+   right: -20px;
+}
+
+.ex .nav.left {
+   left: -20px;
+}
+
+.ex .ico.left {
+   top: -1px;
+   left: 25px;
+   border-width: 2px 2px 0 0;
+}
+.ex .ico.right {
+   top: -1px;
+   right: 25px;
+   border-width:2px 2px  0 0 ;
+}

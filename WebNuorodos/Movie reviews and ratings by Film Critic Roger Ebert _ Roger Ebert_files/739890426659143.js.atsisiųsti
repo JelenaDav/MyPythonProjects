@@ -1,0 +1,71 @@
+/**/ typeof vi.publisherConfig === 'function' && vi.publisherConfig({ 
+  tagConfig: { 
+        OverlayMode: 1, 
+	    enableUserIdModules: true,
+	    Float: true,
+        IASPixelEnabled: false,
+    AbTesting: {
+      percentages: [50, 50],
+      'price_algo_false': {
+        CustomAdParams: [{
+ 			type: 'js',
+ 			param: 'VI_ABTESTPRICEFLOOR',
+ 			value: 'false',
+ 			transforms: []
+         }]
+       },
+       'price_algo_true': {
+        CustomAdParams: [{
+ 			type: 'js',
+ 			param: 'VI_ABTESTPRICEFLOOR',
+ 			value: 'true',
+ 			transforms: []
+         }]
+       }
+    },
+        
+	  
+
+	    AdBreakRetry: true,
+      	FloatSize:0.45,
+     	FloatLimit:336,
+		IAB_Category: 'IAB1',
+		Language: 'en-us',
+		PlacementSelector: {
+          position: 'before',
+          selector: 'p:nth-of-type(2)'
+      },
+	
+  }, 
+  playerConfig: { 
+  }, 
+  viPlayerConfig: {  
+        midrolltime: 8, 
+	    midroll     : 2,
+	    preroll     : 2,
+        maximp: 30,  
+        maxrun: 45,  
+        maxAdErrors: 12,  
+        waterfallRetry: 10,  
+          
+  },  
+  mobile: { 
+        tagConfig: { 
+           Float: true,
+        FloatLimit:260,
+        FloatSettings: {
+			any : { // up / down / any
+				transformOrigin : 'bottom right',
+				position    : {
+					bottom  : '101px',
+					right   : '0px'
+				},
+				originSelector : '',
+				originOffset   : { // bottom, left, right, top
+				}
+			},
+			floatOnPaused : false
+		},  
+           } 
+  } 
+}); 

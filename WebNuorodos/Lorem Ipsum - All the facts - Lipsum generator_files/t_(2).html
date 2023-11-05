@@ -1,0 +1,81 @@
+
+<!-- saved from url=(1713)https://pxdrop.lijit.com/a/t_.htm?ver=1.1258.675&cid=c026#dmn=lipsum.com&pn=%252F&pubid=FreestarCapital&v0=239429&GDPR_v2=CP0t18AP0t18AAKAwAENDeCsAP_AAH_AAAwIg1NV_H__bW9r8X7_aft0eY1P9_j77sQxBhfJE-4F3LvW_JwXx2E5NF36tqoKmRoEu3ZBIUNlHJHUTVmwaogVryHsakWcpTNKJ6BkkFMRM2dYCF5vm4tjeQKY5_p_d3fx2D-t_dv839zzz8VHn3c5f-e0-PCdU5-9Dfn9fRfb-9IP9_78v8v8_l_rk2_eT13_pcvr_D-%2Df_87_XW-9_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQagCzDQuIAuyICQm0DCKBACMKwgIoEAAAAJA0QEALgwKdgYBLrCRACBFAAcEAIQAUZAAgAAEgAQiACQIoEAAEAgEAAIAEAgEADAwADgAtBAIAAQHQMUwoAFAsIEiMiIUwIQoEggJbKBBKCoQVwgCLLAigERsFAAgCQEVgACAsXgMASAlYkECXUG0AABAAgFFKFQik_MAQ4Jmy1V4omwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAACAA.YAAAAAAAAAAA&us_privacy=1-%2D-&tt=t.dhj&cid=c026&lbl=lijit&flbl=pxcel&ll=d&ver=1.1258.675&ell=d&cck=ljt_reader&qs=na&cc=LT&cont=EU&suu2=&ipaddr= -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script type="text/javascript" data-name="TokenSigning">(function() {
+    // Promises
+    var _eid_promises = {};
+    // Turn the incoming message from extension
+    // into pending Promise resolving
+    window.addEventListener("message", function(event) {
+        if (event.source !== window) return;
+        if (event.data.src && (event.data.src === "background.js")) {
+            console.log("Page received: ");
+            console.log(event.data);
+            // Get the promise
+            if (event.data.nonce) {
+                var p = _eid_promises[event.data.nonce];
+                // resolve
+                if (event.data.result === "ok") {
+                    if (event.data.signature !== undefined) {
+                        p.resolve({hex: event.data.signature});
+                    } else if (event.data.version !== undefined) {
+                        p.resolve(event.data.extension + "/" + event.data.version);
+                    } else if (event.data.cert !== undefined) {
+                        p.resolve({hex: event.data.cert});
+                    } else {
+                        console.log("No idea how to handle message");
+                        console.log(event.data);
+                    }
+                } else {
+                    // reject
+                    p.reject(new Error(event.data.result));
+                }
+                delete _eid_promises[event.data.nonce];
+            } else {
+                console.log("No nonce in event msg");
+            }
+        }
+    }, false);
+
+    window.TokenSigning = function() {
+        function nonce() {
+            var val = "";
+            var hex = "abcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < 16; i++) val += hex.charAt(Math.floor(Math.random() * hex.length));
+            return val;
+        }
+
+        function messagePromise(msg) {
+            return new Promise(function(resolve, reject) {
+                // amend with necessary metadata
+                msg["nonce"] = nonce();
+                msg["src"] = "page.js";
+                // send message
+                window.postMessage(msg, "*");
+                // and store promise callbacks
+                _eid_promises[msg.nonce] = {
+                    resolve: resolve,
+                    reject: reject
+                };
+            });
+        }
+        this.getCertificate = function(options) {
+            var msg = {type: "CERT", lang: options.lang, filter: options.filter};
+            console.log("getCertificate()");
+            return messagePromise(msg);
+        };
+        this.sign = function(cert, hash, options) {
+            var msg = {type: "SIGN", cert: cert.hex, hash: hash.hex, hashtype: hash.type, lang: options.lang, info: options.info};
+            console.log("sign()");
+            return messagePromise(msg);
+        };
+        this.getVersion = function() {
+            console.log("getVersion()");
+            return messagePromise({
+                type: "VERSION"
+            });
+        };
+    };
+})();</script></head><body onload="q(location,document)"><script title="meebo_wrapper">
+function q(e,t){var c=function(e){e=e.replace(/([\[|\]])/g,"\\$1");var c=t.cookie[a](new RegExp(e+"=([^;]*)"));return!!c&&c[1]},r=function(e,t){for(var c=0;c<e.length;c++)if(e[c]===t)return c;return-1},i="replace",a="match",n="setAttribute",l=navigator.userAgent,o=e.pathname,d=e.host,s=e.hash,p=s[a](/[#&]cid=([^&]*)/)[1],m=s[a](/[#&]cls=([^&]*)/),E=s[a](/[#&]ver=([^&]*)/)[1],h=s[a](/[#&]lbl=([^&]*)/)[1],g=s[a](/[#&]cc=([^&]*)/)[1],A=s[a](/[#&]rc=([^&]*)/)?s[a](/[#&]rc=([^&]*)/)[1]:"",C=s[a](/[#&]w=([^&]*)/),R=s[a](/[#&]ell=([^&]*)/)[1],T=decodeURIComponent(s[a](/[#&]cck=([^&]*)/)[1]),u=c(h+"Acc3PC")||c(T),I=/^(?!.*(?:chromium|opr|Edg)).*chrome/i.test(l),f=!u&&I;if(f){var v=t.createElement("img"),L="//"+d+"/"+R+"/a.gif?aqet=priv_block_3pcookie&r="+(new Date).getTime()+"&cid="+p+(m?"&cls="+m[1]:"");v[n]("src",L),v[n]("title","userblk3PC"),t.body.appendChild(v)}else{var P=t.body.appendChild(t.createElement("IFRAME")),S=P.contentWindow.document;P[n]("id","i"+h+"frame"),P[n]("title","i"+h+"frame"),P.style.cssText="style:display:none;width:0px;height:0px;left:0px;";var w="a",N=o[i](/\/?(?:.*\/)*(.*)/,"/"+E+"/"+w+(r(["US","GB","BR","CA","IN","FR","IT","PH","DE","AU","ES","MX","ID","NL","GR","MY","SG","TR","TH","RU","RO","BE","VN","SA","EG","AR","TW","SE","KR","PL","CO","PK","AE","BD","PT","CL","PE","NZ","JP","IE","CH","DK","GE","NO","FI","JO","RS","IS","UA","IL","HK","DZ","VE","AT","NP","HU","MA","CZ","ZA","CN","BG","CY","LK","QA","EC","HR","EE","LV","LI","LU","LT","MT","SK","SI"],g)>-1?"/"+g+(A?"/"+A:""):"")+"/$1")[i](/(\.dhj|_\.htm)/,"_.js")[i](/^((?:\/[a-zA-Z0-9.]+)*\/t?)(?:c)(s?.+)$/,"$1$2"),b="//"+d+N+"?cid="+p+(m?"&cls="+m[1]:"")+(C?"&w="+C[1]:"");b+=s+"&htmReqTime="+(new Date).getTime(),b=b[i](/\\/g,"\\\\")[i](/&/g,"&amp;")[i](/'/g,"\\'"),S.open().write("<body onload=\"var d=document,s=d.getElementsByTagName('head')[0].appendChild(d.createElement('script'));s.id='i"+h+"scrpt'; s.title='i"+h+"scrpt';s.src='"+b+"'\">"),S.close()}}
+</script>
+<iframe id="ilijitframe" title="ilijitframe" style="width: 0px; height: 0px; left: 0px;" src="./saved_resource(22).html"></iframe></body></html>
