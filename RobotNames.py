@@ -1,4 +1,5 @@
 import os
+
 folderpath = r"C:\\Users\\lenik\\OneDrive\Desktop\\JELENOS\UIPATH"
 
 def listDir(dir):
@@ -9,4 +10,3 @@ def listDir(dir):
 
 if __name__ == "__main__":
     listDir(folderpath)
-    kmkmlkm
